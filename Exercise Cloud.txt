@@ -1,0 +1,25 @@
+--demo 1
+
+select
+avg(weight_pounds), state, avg(year)
+from
+'bigquery-public-data.samples.nationality'
+group by 2
+
+-- demo 2
+
+
+# before optimize
+select
+weight_pounds, state, year, gestation_weeks
+from 
+'bigquery-public-data.samples.nationality'
+order by weight_pounds Desc limit 10;
+
+# optimize query
+select
+create table 'qwiklabs-gcp-babyname.test_table as (â€¨select
+weight_pounds, state, year, gestation_weeks
+from 
+'bigquery-public-data.samples.nationality'
+order by weight_pounds Descâ€¨)
